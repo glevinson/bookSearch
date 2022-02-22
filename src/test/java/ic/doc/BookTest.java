@@ -1,11 +1,9 @@
 package ic.doc;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 public class BookTest {
 
@@ -40,5 +38,4 @@ public class BookTest {
   public void convertsToFormattedStringOfTitleAndAuthor() {
     assertThat(oliverTwist.toString(), is("Oliver Twist, by Charles Dickens, published 1859"));
   }
-
 }

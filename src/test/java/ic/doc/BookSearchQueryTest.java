@@ -1,20 +1,20 @@
 package ic.doc;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import ic.doc.catalogues.ImperialCollegeLibraryCatalogue;
+import org.junit.Test;
 
 import java.util.List;
 
-import ic.doc.catalogues.ImperialCollegeLibraryCatalogue;
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class BookSearchQueryTest {
 
   @Test
   public void searchesForBooksInLibraryCatalogueByAuthorSurname() {
 
-    List<Book> books = new QueryBuilder( ).withSurname("dickens").build().execute();
+    List<Book> books = new QueryBuilder().withSurname("dickens").build().execute();
 
     assertThat(books.size(), is(2));
     assertTrue(books.get(0).matchesAuthor("dickens"));
@@ -59,7 +59,8 @@ public class BookSearchQueryTest {
   @Test
   public void searchesForBooksInLibraryCatalogueWithCombinationOfParameters() {
 
-    List<Book> books = new QueryBuilder().withSurname("dickens").withPublishedAfter(1840).build().execute();
+    List<Book> books =
+        new QueryBuilder().withSurname("dickens").withPublishedAfter(1840).build().execute();
 
     assertThat(books.size(), is(1));
     assertTrue(books.get(0).matchesAuthor("charles dickens"));
@@ -68,7 +69,13 @@ public class BookSearchQueryTest {
   @Test
   public void searchesForBooksInLibraryCatalogueWithCombinationOfTitleAndOtherParameters() {
 
-    List<Book> books = new QueryBuilder().withTitle("of").withPublishedAfter(1800).withPublishedBefore(2000).build().execute();
+    List<Book> books =
+        new QueryBuilder()
+            .withTitle("of")
+            .withPublishedAfter(1800)
+            .withPublishedBefore(2000)
+            .build()
+            .execute();
 
     assertThat(books.size(), is(3));
     assertTrue(books.get(0).matchesAuthor("charles dickens"));
@@ -77,10 +84,9 @@ public class BookSearchQueryTest {
   @Test
   public void canSearchDifferentLibraryThanDefaultBritishLibraryCatalogue() {
     ImperialCollegeLibraryCatalogue ICLibrary = ImperialCollegeLibraryCatalogue.getInstance();
-    List<Book> books = new QueryBuilder().withTitle("Into the Wild").withLibrary(ICLibrary).build().execute();
+    List<Book> books =
+        new QueryBuilder().withTitle("Into the Wild").withLibrary(ICLibrary).build().execute();
 
     assertTrue(books.get(0).matchesAuthor("jon krakauer"));
-
   }
-
 }

@@ -1,6 +1,5 @@
 package ic.doc;
 
-import ic.doc.catalogues.BritishLibraryCatalogue;
 import ic.doc.catalogues.Library;
 
 import java.util.List;

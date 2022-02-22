@@ -1,11 +1,5 @@
 package ic.doc.catalogues;
 
-import static ic.doc.catalogues.QueryParser.firstNameFrom;
-import static ic.doc.catalogues.QueryParser.lastNameFrom;
-import static ic.doc.catalogues.QueryParser.publishedAfterFrom;
-import static ic.doc.catalogues.QueryParser.publishedBeforeFrom;
-import static ic.doc.catalogues.QueryParser.titleFrom;
-
 import ic.doc.Book;
 
 import java.util.Arrays;
@@ -13,7 +7,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BritishLibraryCatalogue implements Library{
+import static ic.doc.catalogues.QueryParser.*;
+
+public class BritishLibraryCatalogue implements Library {
 
   // imagine that each new instance of this object uses more than 500MB of RAM
 
@@ -21,8 +17,8 @@ public class BritishLibraryCatalogue implements Library{
 
   private final Collection<Book> catalogue = allTheBooks();
 
-  public static synchronized BritishLibraryCatalogue getInstance(){
-    if ( instance == null ){
+  public static synchronized BritishLibraryCatalogue getInstance() {
+    if (instance == null) {
       instance = new BritishLibraryCatalogue();
     }
     return instance;
@@ -38,7 +34,6 @@ public class BritishLibraryCatalogue implements Library{
         .filter(book -> book.publishedBefore(publishedBeforeFrom(query)))
         .collect(Collectors.toList());
   }
-
 
   private Collection<Book> allTheBooks() {
 
@@ -59,5 +54,4 @@ public class BritishLibraryCatalogue implements Library{
     // and so on... Imagine that this list is very large and therefore uses a lot of memory.
 
   }
-
 }
