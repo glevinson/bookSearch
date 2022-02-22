@@ -5,6 +5,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+
+import ic.doc.catalogues.ImperialCollegeLibraryCatalogue;
 import org.junit.Test;
 
 public class BookSearchQueryTest {
@@ -71,4 +73,14 @@ public class BookSearchQueryTest {
     assertThat(books.size(), is(3));
     assertTrue(books.get(0).matchesAuthor("charles dickens"));
   }
+
+  @Test
+  public void canSearchDifferentLibraryThanDefaultBritishLibraryCatalogue() {
+    ImperialCollegeLibraryCatalogue ICLibrary = ImperialCollegeLibraryCatalogue.getInstance();
+    List<Book> books = new QueryBuilder().withTitle("Into the Wild").withLibrary(ICLibrary).build().execute();
+
+    assertTrue(books.get(0).matchesAuthor("jon krakauer"));
+
+  }
+
 }
