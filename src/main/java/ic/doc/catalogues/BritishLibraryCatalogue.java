@@ -16,7 +16,16 @@ public class BritishLibraryCatalogue {
 
   // imagine that each new instance of this object uses more than 500MB of RAM
 
+  private static BritishLibraryCatalogue instance;
+
   private final Collection<Book> catalogue = allTheBooks();
+
+  public static synchronized BritishLibraryCatalogue getInstance(){
+    if ( instance == null ){
+      instance = new BritishLibraryCatalogue();
+    }
+    return instance;
+  }
 
   public List<Book> searchFor(String query) {
     return catalogue.stream()
