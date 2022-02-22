@@ -1,5 +1,10 @@
 package ic.doc;
 
+import ic.doc.catalogues.BritishLibraryCatalogue;
+import ic.doc.catalogues.Library;
+
+import javax.management.Query;
+
 public class QueryBuilder {
 
   private String name1 = null;
@@ -7,6 +12,7 @@ public class QueryBuilder {
   private String title = null;
   private Integer date1 = null;
   private Integer date2 = null;
+  private Library library = BritishLibraryCatalogue.getInstance();
 
   public QueryBuilder withForename(String name){
     this.name1 = name;
@@ -32,9 +38,13 @@ public class QueryBuilder {
     this.date2 = date;
     return this;
   }
+  public QueryBuilder withLibrary(Library library){
+    this.library = library;
+    return this;
+  }
 
   public BookSearchQuery build(){
-    new BookSearchQuery(name1, name2, title, date1, date2);
+    return new BookSearchQuery(name1, name2, title, date1, date2, library);
   }
 
 }
