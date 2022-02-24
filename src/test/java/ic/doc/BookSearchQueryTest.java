@@ -83,9 +83,13 @@ public class BookSearchQueryTest {
 
   @Test
   public void canSearchDifferentLibraryThanDefaultBritishLibraryCatalogue() {
-    ImperialCollegeLibraryCatalogue ImperialCollegeLibrary = ImperialCollegeLibraryCatalogue.getInstance();
+    ImperialCollegeLibraryCatalogue imperialCollegeLibrary =
+        ImperialCollegeLibraryCatalogue.getInstance();
     List<Book> books =
-        new QueryBuilder().withTitle("Into the Wild").withLibrary(ImperialCollegeLibrary).build().execute();
+        new QueryBuilder().withTitle("Into the Wild")
+            .withLibrary(imperialCollegeLibrary)
+            .build()
+            .execute();
 
     assertTrue(books.get(0).matchesAuthor("jon krakauer"));
   }
