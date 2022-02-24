@@ -7,8 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ic.doc.catalogues.QueryParser.*;
-
 public class BritishLibraryCatalogue implements Library {
 
   // imagine that each new instance of this object uses more than 500MB of RAM
@@ -27,11 +25,11 @@ public class BritishLibraryCatalogue implements Library {
   @Override
   public List<Book> searchFor(String query) {
     return catalogue.stream()
-        .filter(book -> book.matchesAuthor(lastNameFrom(query)))
-        .filter(book -> book.matchesAuthor(firstNameFrom(query)))
-        .filter(book -> book.matchesTitle(titleFrom(query)))
-        .filter(book -> book.publishedSince(publishedAfterFrom(query)))
-        .filter(book -> book.publishedBefore(publishedBeforeFrom(query)))
+        .filter(book -> book.matchesAuthor(QueryParser.lastNameFrom(query)))
+        .filter(book -> book.matchesAuthor(QueryParser.firstNameFrom(query)))
+        .filter(book -> book.matchesTitle(QueryParser.titleFrom(query)))
+        .filter(book -> book.publishedSince(QueryParser.publishedAfterFrom(query)))
+        .filter(book -> book.publishedBefore(QueryParser.publishedBeforeFrom(query)))
         .collect(Collectors.toList());
   }
 
